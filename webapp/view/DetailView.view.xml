@@ -1,0 +1,76 @@
+<mvc:View
+  controllerName="app.nwp3.controller.DetailView"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+>
+  <Page
+    id="DetailView"
+    title="Product Detail"
+    showNavButton="true"
+    navButtonPress=".onNavBack"
+  >
+    <content>
+      <ObjectHeader
+        title="{ProductName}"
+        number="{
+          path: 'UnitPrice',
+          formatter: '.formatter.usdToInr'
+        }"
+        numberUnit="INR"
+        intro="{Category/CategoryName}"
+      >
+        <statuses>
+          <ObjectStatus
+            text="Stock: {UnitsInStock}"
+            state="{= ${UnitsInStock} > 0 ? 'Success' : 'Error' }"
+          />
+        </statuses>
+        <attributes>
+          <ObjectAttribute
+            title="Supplier"
+            text="{Supplier/CompanyName}"
+          />
+          <ObjectAttribute
+            title="Quantity Per Unit"
+            text="{QuantityPerUnit}"
+          />
+        </attributes>
+      </ObjectHeader>
+      <VBox class="sapUiSmallMargin">
+        <ObjectStatus
+          text="Units In Stock: {UnitsInStock}"
+          state="Success"
+        />
+        <ObjectStatus
+          text="Units On Order: {UnitsOnOrder}"
+          state="Information"
+        />
+        <ObjectStatus
+          text="Discontinued: {= ${Discontinued} ? 'Yes' : 'No' }"
+          state="None"
+        />
+      </VBox>
+      <!-- Optional: show related orders via navigation property -->
+      <Panel headerText="Order Details (Top 5)">
+        <List items="{
+          path: 'Order_Details',
+          parameters: {
+            select: 'OrderID,Quantity'
+          },
+          sorter: {
+            path: 'OrderID',
+            descending: true
+          },
+          length: 5
+        }">
+          <items>
+            <StandardListItem
+              title="Order #{OrderID}"
+              description="Qty: {Quantity}"
+            />
+          </items>
+        </List>
+      </Panel>
+    </content>
+  </Page>
+</mvc:View>

@@ -1,0 +1,99 @@
+<mvc:View
+    controllerName="app.nwp3.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:comp="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="Northwind Products"
+    >
+        <content> 
+            <comp:FilterBar class="filterBar">
+            
+                <comp:filterItems>
+                    <comp:FilterItem name="Search by Product Name">
+                        <comp:control>
+                            <Input
+                                id="idFilterloc"
+                                placeholder="Search by Product Name"
+                                liveChange="onSearch"
+                            />
+                        </comp:control>
+                    </comp:FilterItem>
+
+
+                    <comp:FilterItem name="Search by Supplier">
+                        <comp:control>
+                            <Input
+                                id="idFilterdesc"
+                                placeholder="Search by Supplier"
+                                liveChange="onSearch"
+                            />
+                        </comp:control>
+                    </comp:FilterItem>
+                
+
+                    <comp:FilterItem name="Sorting">                    
+                    <comp:control>
+                        <HBox width="100%" justifyContent="End" alignItems="Center">
+                        <layoutData>
+                            <l:GridData span="L1 M2 S12"/>
+                        </layoutData>
+                        <Button icon="sap-icon://sort"
+                                type="Transparent"
+                                tooltip="Sort"
+                                press="onSort"/>
+                        </HBox>
+                    </comp:control>
+
+
+                    </comp:FilterItem>
+
+                </comp:filterItems>
+                
+            </comp:FilterBar>
+            
+
+            <List
+                id="productsList"
+                growing="true"
+                growingScrollToLoad="true"
+                items="{
+              path: '/Products',
+              parameters: { expand: 'Category,Supplier' }
+            }"
+            >
+                <items>
+                    <ObjectListItem
+                        type="Navigation"
+                        press=".onProductPress"
+                        title="{ProductName}"
+                        number="{
+                path: 'UnitPrice',
+                formatter: '.formatter.usdToInr'
+              }"
+                        numberUnit="INR"
+                    >
+                        <attributes>
+                            <ObjectAttribute
+                                text="Category: {Category/CategoryName}"
+                            />
+                            <ObjectAttribute
+                                text="Supplier: {Supplier/CompanyName}"
+                            />
+                        </attributes>
+                        <firstStatus>
+                            <ObjectStatus
+                                text="In Stock: {UnitsInStock}"
+                                state="Success"
+                            />
+                        </firstStatus>
+                    </ObjectListItem>
+                </items>
+            </List>
+        </content>
+    </Page>
+</mvc:View>
