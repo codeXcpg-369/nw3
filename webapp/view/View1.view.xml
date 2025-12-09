@@ -14,6 +14,23 @@
             <comp:FilterBar class="filterBar">
             
                 <comp:filterItems>
+
+                    <comp:FilterItem name="Sorting">                    
+                    <comp:control>
+                        <HBox width="100%" justifyContent="End" alignItems="End">
+                        <layoutData>
+                            <l:GridData span="L1 M2 S12"/>
+                        </layoutData>
+                        <Button icon="sap-icon://sort"
+                                type="Transparent"
+                                tooltip="Sort"
+                                press="onSort"/>
+                        </HBox>
+                    </comp:control>
+
+
+                    </comp:FilterItem>
+
                     <comp:FilterItem name="Search by Product Name">
                         <comp:control>
                             <Input
@@ -34,23 +51,18 @@
                             />
                         </comp:control>
                     </comp:FilterItem>
+                    <comp:FilterItem name="Search by Category">
+                        <comp:control>
+                            <Input
+                                id="idFilterCat"
+                                placeholder="Search by Category"
+                                liveChange="onSearch"
+                            />
+                        </comp:control>
+                    </comp:FilterItem>
                 
 
-                    <comp:FilterItem name="Sorting">                    
-                    <comp:control>
-                        <HBox width="100%" justifyContent="End" alignItems="Center">
-                        <layoutData>
-                            <l:GridData span="L1 M2 S12"/>
-                        </layoutData>
-                        <Button icon="sap-icon://sort"
-                                type="Transparent"
-                                tooltip="Sort"
-                                press="onSort"/>
-                        </HBox>
-                    </comp:control>
 
-
-                    </comp:FilterItem>
 
                 </comp:filterItems>
                 

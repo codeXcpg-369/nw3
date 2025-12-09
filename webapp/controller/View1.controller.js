@@ -15,6 +15,7 @@ sap.ui.define([
       let aFilter = [];
       let slocId = this.getView().byId("idFilterloc").getValue();
       let sdescId = this.getView().byId("idFilterdesc").getValue();
+      let scatId = this.getView().byId("idFilterCat").getValue();
 
       if (slocId) {
         let filterName = new Filter("ProductName", FilterOperator.Contains, slocId);
@@ -22,6 +23,10 @@ sap.ui.define([
       }
       if (sdescId) {
         let filterName = new Filter("Supplier/CompanyName", FilterOperator.Contains, sdescId);
+        aFilter.push(filterName);
+      }
+      if (scatId) {
+        let filterName = new Filter("Category/CategoryName", FilterOperator.Contains, scatId);
         aFilter.push(filterName);
       }
       let oTable = this.getView().byId("productsList");

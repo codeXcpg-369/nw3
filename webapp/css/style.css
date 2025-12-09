@@ -1,1 +1,10 @@
 /* Enter your custom styles here */
+.sapUiMdcFilterBarLayoutItems {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 0 1rem;
+    flex-direction: row-reverse;
+    align-content: space-around;
+    justify-content: space-between;
+}
