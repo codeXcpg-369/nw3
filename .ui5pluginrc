@@ -1,0 +1,14 @@
+{
+  "ui5": {
+    "ui5linter": {
+      "usage": {
+        "TagAttributeLinter": false
+      },
+      "severity": {
+        "TagAttributeLinter": "Information"
+      },
+      "idNamingPattern": "",
+      "eventNamingPattern": ""
+    }
+  }
+}

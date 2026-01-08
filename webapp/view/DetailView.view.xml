@@ -1,76 +1,64 @@
+
 <mvc:View
   controllerName="app.nwp3.controller.DetailView"
   xmlns:mvc="sap.ui.core.mvc"
-  xmlns="sap.m"
->
-  <Page
-    id="DetailView"
-    title="Product Detail"
-    showNavButton="true"
-    navButtonPress=".onNavBack"
-  >
+  xmlns="sap.m">
+
+  <Page id="DetailView"
+        title="Product Detail"
+        showNavButton="true"
+        navButtonPress=".onNavBack">
+
     <content>
-      <ObjectHeader
-        title="{ProductName}"
-        number="{
-          path: 'UnitPrice',
-          formatter: '.formatter.usdToInr'
-        }"
-        numberUnit="INR"
-        intro="{Category/CategoryName}"
-      >
-        <statuses>
-          <ObjectStatus
-            text="Stock: {UnitsInStock}"
-            state="{= ${UnitsInStock} > 0 ? 'Success' : 'Error' }"
-          />
-        </statuses>
-        <attributes>
-          <ObjectAttribute
-            title="Supplier"
-            text="{Supplier/CompanyName}"
-          />
-          <ObjectAttribute
-            title="Quantity Per Unit"
-            text="{QuantityPerUnit}"
-          />
-        </attributes>
-      </ObjectHeader>
-      <VBox class="sapUiSmallMargin">
-        <ObjectStatus
-          text="Units In Stock: {UnitsInStock}"
-          state="Success"
-        />
-        <ObjectStatus
-          text="Units On Order: {UnitsOnOrder}"
-          state="Information"
-        />
-        <ObjectStatus
-          text="Discontinued: {= ${Discontinued} ? 'Yes' : 'No' }"
-          state="None"
-        />
+
+      <!-- Header band (replaces ObjectHeader to allow a true center image) -->
+      <HBox id="_IDGenHBox1" class="customHeaderBand sapUiTinyMarginBottom" alignItems="Center" justifyContent="SpaceBetween">
+        <!-- Left: title + intro + attributes -->
+        <VBox id="_IDGenVBox" class="headerLeft" width="45%">
+          <Title id="_IDGenTitle" level="H2" text="{ProductName}" />
+          <Text id="_IDGenText" text="{Category/CategoryName}" class="sapUiTinyMarginBottom" />
+          <Text id="_IDGenText1" text="Supplier: {Supplier/CompanyName}" />
+          <Text id="_IDGenText2" text="Quantity Per Unit: {QuantityPerUnit}" />
+        </VBox>
+
+        <!-- Center: BIG image (from Category/Picture) -->
+        <Image id="_IDGenImage"
+          width="9.5rem" height="9.5rem" densityAware="false" class="headerCenterImage"
+          src="{
+            path: 'Category/Picture',
+            formatter: '.formatter.categoryImageDataUri'
+          }" />
+
+        <!-- Right: price + stock -->
+        <VBox id="_IDGenVBox1" class="headerRight" width="45%" alignItems="End">
+          <ObjectNumber id="_IDGenObjectNumber" number="{
+                            path: 'UnitPrice',
+                            formatter: '.formatter.usdToInr'
+                          }" unit="INR" emphasized="true" />
+          <ObjectStatus id="_IDGenObjectStatus1" text="Stock: {UnitsInStock}" state="{= ${UnitsInStock} > 0 ? 'Success' : 'Error' }" />
+        </VBox>
+      </HBox>
+
+      <!-- Rest of page -->
+      <VBox id="_IDGenVBox2" class="sapUiSmallMargin">
+        <ObjectStatus id="_IDGenObjectStatus2" text="Units In Stock: {UnitsInStock}" state="Success"/>
+        <ObjectStatus id="_IDGenObjectStatus3" text="Units On Order: {UnitsOnOrder}" state="Information"/>
+        <ObjectStatus id="_IDGenObjectStatus4" text="Discontinued: {= ${Discontinued} ? 'Yes' : 'No' }" state="None"/>
       </VBox>
-      <!-- Optional: show related orders via navigation property -->
-      <Panel headerText="Order Details (Top 5)">
-        <List items="{
+
+      <Panel id="_IDGenPanel" headerText="Order Details (Top 5)">
+        <List id="_IDGenList" items="{
           path: 'Order_Details',
-          parameters: {
-            select: 'OrderID,Quantity'
-          },
-          sorter: {
-            path: 'OrderID',
-            descending: true
-          },
+          parameters: { select: 'OrderID,Quantity' },
+          sorter: { path: 'OrderID', descending: true },
           length: 5
         }">
           <items>
-            <StandardListItem
-              title="Order #{OrderID}"
-              description="Qty: {Quantity}"
-            />
+            <StandardListItem id="_IDGenStandardListItem1" title="Order #{OrderID}" description="Qty: {Quantity}"/>
           </items>
         </List>
       </Panel>
+
     </content>
   </Page>
 </mvc:View>

@@ -11,17 +11,17 @@
         title="Northwind Products"
     >
         <content> 
-            <comp:FilterBar class="filterBar">
+            <comp:FilterBar id="_IDGenFilterBar" class="filterBar">
             
                 <comp:filterItems>
 
-                    <comp:FilterItem name="Sorting">                    
+                    <comp:FilterItem id="_IDGenFilterItem1" name="Sorting">                    
                     <comp:control>
-                        <HBox width="100%" justifyContent="End" alignItems="End">
+                        <HBox id="_IDGenHBox" width="100%" justifyContent="End" alignItems="End">
                         <layoutData>
-                            <l:GridData span="L1 M2 S12"/>
+                            <l:GridData id="_IDGenGridData" span="L1 M2 S12"/>
                         </layoutData>
-                        <Button icon="sap-icon://sort"
+                        <Button id="_IDGenButton" icon="sap-icon://sort"
                                 type="Transparent"
                                 tooltip="Sort"
                                 press="onSort"/>
@@ -31,7 +31,7 @@
 
                     </comp:FilterItem>
 
-                    <comp:FilterItem name="Search by Product Name">
+                    <comp:FilterItem id="_IDGenFilterItem2" name="Search by Product Name">
                         <comp:control>
                             <Input
                                 id="idFilterloc"
@@ -42,7 +42,7 @@
                     </comp:FilterItem>
 
 
-                    <comp:FilterItem name="Search by Supplier">
+                    <comp:FilterItem id="_IDGenFilterItem3" name="Search by Supplier">
                         <comp:control>
                             <Input
                                 id="idFilterdesc"
@@ -51,7 +51,7 @@
                             />
                         </comp:control>
                     </comp:FilterItem>
-                    <comp:FilterItem name="Search by Category">
+                    <comp:FilterItem id="_IDGenFilterItem4" name="Search by Category">
                         <comp:control>
                             <Input
                                 id="idFilterCat"
@@ -79,33 +79,119 @@
             }"
             >
                 <items>
-                    <ObjectListItem
+
+                    <ObjectListItem id="_IDGenObjectListItem"
                         type="Navigation"
+                        
                         press=".onProductPress"
                         title="{ProductName}"
+                        
+
+            icon="{
+              path: 'Category/Picture',
+              formatter: '.formatter.categoryIconDataUri'
+            }"
+
+
+
+            iconDensityAware="false"
+
                         number="{
                 path: 'UnitPrice',
                 formatter: '.formatter.usdToInr'
               }"
                         numberUnit="INR"
-                    >
+                    >          
+
+
+
+
+                    <!-- <Image id="_IDGenImage" width="3rem" height="3rem"
+                            densityAware="false"
+                            src="{
+                            path: 'Category/Picture',
+                            formatter: '.formatter.categoryImageFromBase64'
+                            }" /> -->
+
+
+
+                            
                         <attributes>
-                            <ObjectAttribute
+                            <ObjectAttribute id="_IDGenObjectAttribute"
                                 text="Category: {Category/CategoryName}"
                             />
-                            <ObjectAttribute
+                            <ObjectAttribute id="_IDGenObjectAttribute1"
                                 text="Supplier: {Supplier/CompanyName}"
                             />
                         </attributes>
                         <firstStatus>
-                            <ObjectStatus
+                            <ObjectStatus id="_IDGenObjectStatus"
                                 text="In Stock: {UnitsInStock}"
                                 state="Success"
                             />
                         </firstStatus>
+
+
                     </ObjectListItem>
+
+                  
                 </items>
             </List>
         </content>
     </Page>
 </mvc:View>
+
+
+
+
+
+<!-- 
+<mvc:View
+  controllerName="app.nwp3.controller.View1"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:comp="sap.ui.comp.filterbar"
+  xmlns:l="sap.ui.layout"
+  xmlns="sap.m">
+
+  <Page id="page" title="Northwind Products">
+    <content>
+
+      
+      <comp:FilterBar id="_IDGenFilterBar" class="filterBar">
+        <comp:filterItems>
+
+        </comp:filterItems>
+      </comp:FilterBar>
+
+
+      <List id="productsList"
+            growing="true"
+            growingScrollToLoad="true"
+            items="{
+              path: '/Products',
+              parameters: { expand: 'Category,Supplier' }
+            }">
+
+        <items>
+          <CustomListItem>
+            <HBox alignItems="Center" justifyContent="Start">
+              <Image width="3rem" height="3rem"
+                     densityAware="false"
+                     src="{
+                       path: 'Category/Picture',
+                       formatter: '.formatter.categoryImageFromBase64'
+                     }" />
+
+              <VBox class="sapUiSmallMarginBegin">
+                <ObjectIdentifier title="{ProductName}" text="{Category/CategoryName}" />
+                <ObjectAttribute text="Supplier: {Supplier/CompanyName}" />
+                <ObjectStatus text="In Stock: {UnitsInStock}" state="Success" />
+              </VBox>
+            </HBox>
+          </CustomListItem>
+        </items>
+      </List>
+
+    </content>
+  </Page>
+</mvc:View> -->
