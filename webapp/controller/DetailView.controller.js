@@ -12,6 +12,8 @@ sap.ui.define([
     onInit() {
       const oRouter = this.getOwnerComponent().getRouter();
       oRouter.getRoute("ProductDetail").attachPatternMatched(this._onMatched, this);
+
+        console.log("cfg model in Detail:", this.getView().getModel("cfg"));
     },
 
 

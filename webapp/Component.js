@@ -24,6 +24,8 @@ sap.ui.define([
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
 
+
+            
             // enable routing
             this.getRouter().initialize();
             this.getRouter().navTo("RouteView1");

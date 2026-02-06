@@ -103,19 +103,6 @@
                         numberUnit="INR"
                     >          
 
-
-
-
-                    <!-- <Image id="_IDGenImage" width="3rem" height="3rem"
-                            densityAware="false"
-                            src="{
-                            path: 'Category/Picture',
-                            formatter: '.formatter.categoryImageFromBase64'
-                            }" /> -->
-
-
-
-                            
                         <attributes>
                             <ObjectAttribute id="_IDGenObjectAttribute"
                                 text="Category: {Category/CategoryName}"

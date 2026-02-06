@@ -36,25 +36,36 @@
 // });
 
 
-// app/nwp3/model/formatter.js
 sap.ui.define(["sap/ui/core/format/NumberFormat"], (NumberFormat) => {
   "use strict";
 
-  const DEFAULT_USD_TO_INR = 84.5;
+  const DEFAULT_USD_TO_INR = 90.16; // fallback if API fails
 
-  return {
+  
+return {
     usdToInr: function (fUsd) {
       if (fUsd == null || isNaN(fUsd)) return "";
+
       let rate = DEFAULT_USD_TO_INR;
+
       const view = this.getView ? this.getView() : null;
-      const cfg = view?.getModel("cfg");
-      if (cfg) {
-        const m = cfg.getData?.() || {};
-        if (typeof m.usdToInr === "number" && m.usdToInr > 0) rate = m.usdToInr;
+      const cfg = view?.getModel?.("cfg");
+      const fetched = cfg?.getProperty?.("/usdToInr");
+
+      if (typeof fetched === "number" && fetched > 0) {
+        rate = fetched;
       }
-      const fmt = NumberFormat.getCurrencyInstance({ currencyCode: false, maxFractionDigits: 2, minFractionDigits: 2 });
-      return fmt.format(fUsd * rate, "INR");
-    },
+
+      // return number only; the control shows "INR" via numberUnit
+      const fmt = NumberFormat.getFloatInstance({
+        maxFractionDigits: 2,
+        minFractionDigits: 2,
+        groupingEnabled: true
+      });
+
+      return "₹"+fmt.format(Number(fUsd) * rate);
+    }
+,
 
     /**
      * Northwind V2 category images are BMP wrapped with an OLE header.

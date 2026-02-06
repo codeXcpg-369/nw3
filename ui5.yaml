@@ -18,6 +18,19 @@ server:
         backend:
           - path: /V2
             url: https://services.odata.org
+    
+    
+    - name: ui5-middleware-simpleproxy
+      afterMiddleware: compression
+      mountPath: /fx
+      configuration:
+        baseUri: "https://api.exchangerate.host"
+        strictSSL: true
+        query:
+          access_key: "a5ac7593d865b5dd7bccd3a16f3f7e6a"
+          currencies: "INR"
+
+
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
